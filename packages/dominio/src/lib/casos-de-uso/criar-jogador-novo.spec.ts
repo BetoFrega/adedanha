@@ -6,13 +6,12 @@ import {
   GerenciadorDeEventos,
 } from '../adaptadores/gerenciador-de-eventos';
 
+import { RepositórioDeJogadoresMock } from '../adaptadores/repositorio-de-jogadores-mock';
+
 describe('Caso: cria jogador novo', () => {
   it('deve chamar o repositório', () => {
-    const repositórioDeJogadoresMock: Partial<RepositórioDeJogadores> = {
-      salvar: jest.fn().mockImplementation(async (jogador: Jogador) => {
-        return jogador;
-      }),
-    };
+    const repositórioDeJogadoresMock: Partial<RepositórioDeJogadores> = new RepositórioDeJogadoresMock();
+    jest.spyOn(repositórioDeJogadoresMock, 'salvar');
     const gerenciadorDeEventosMock: Partial<GerenciadorDeEventos> = {
       enviar: jest.fn(),
     };
