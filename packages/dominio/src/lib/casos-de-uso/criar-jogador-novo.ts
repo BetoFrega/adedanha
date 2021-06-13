@@ -13,13 +13,11 @@ export class CriarJogadorNovo {
 
   async executar(userId: string, opções: { nome: string }) {
     const jogador = Jogador.novo({ nome: opções.nome, userId });
-    await this.repositórioDeJogadores
-      .salvar(userId, jogador)
-      .then((jogador: Jogador) => {
-        return this.gerenciadorDeEventos.enviar(Eventos.usuárioCriado, {
-          userId,
-          jogador,
-        });
+    await this.repositórioDeJogadores.salvar(userId, jogador).then(() => {
+      return this.gerenciadorDeEventos.enviar(Eventos.usuárioCriado, {
+        userId,
+        jogador,
       });
+    });
   }
 }

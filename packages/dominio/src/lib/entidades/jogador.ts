@@ -1,6 +1,11 @@
+import { Partida } from './partida';
+
 export class Jogador {
   private userId: string;
-  private valores: { nome: string };
+  private valores: {
+    partidaAtual?: Partida;
+    nome: string;
+  };
 
   constructor(param: { nome: string; userId: string }) {
     this.userId = param.userId;
@@ -15,5 +20,10 @@ export class Jogador {
     }
 
     return new Jogador({ nome: param.nome, userId: param.userId });
+  }
+
+  entrarNaPartida(partida: Partida) {
+    partida.incluirJogador(this);
+    this.valores.partidaAtual = partida;
   }
 }

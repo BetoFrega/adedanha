@@ -6,7 +6,7 @@ import {
   GerenciadorDeEventos,
 } from '../adaptadores/gerenciador-de-eventos';
 
-import { RepositórioDeJogadoresMock } from '../adaptadores/repositorio-de-jogadores-mock';
+import { RepositórioDeJogadoresMock } from '../adaptadores/repositorio-de-jogadores.mock';
 
 describe('Caso: cria jogador novo', () => {
   it('deve chamar o repositório', () => {

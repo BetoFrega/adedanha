@@ -3,9 +3,9 @@ import { RepositórioDeJogadores } from './repositorio-de-jogadores';
 
 export class RepositórioDeJogadoresMock implements RepositórioDeJogadores {
   private jogadores = new Map<string, Jogador>();
-  salvar = async (userId, jogador: Jogador): Promise<Jogador> => {
-    this.jogadores.set(userId, jogador);
-    return jogador;
+
+  salvar = async (userId, jogador: Jogador): Promise<void> => {
+    await this.jogadores.set(userId, jogador);
   };
 
   recuperar(userid: string): Promise<Jogador> {

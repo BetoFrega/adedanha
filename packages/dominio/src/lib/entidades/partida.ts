@@ -1,13 +1,22 @@
+import { Jogador } from './jogador';
+
 export class Partida {
   readonly código: string;
-  private valores: {};
+  private valores: {
+    jogadores: Set<Jogador>;
+    criador: Jogador;
+  };
 
-  constructor(param: { idDoCriador: string }) {
+  constructor(param: { criador: Jogador }) {
     this.código = this.makeid(6);
+    this.valores = {
+      jogadores: new Set<Jogador>(),
+      criador: param.criador,
+    };
   }
 
-  static nova(param: { idDoCriador: string }): Partida {
-    return new Partida({ idDoCriador: param.idDoCriador });
+  static nova(param: { criador: Jogador }): Partida {
+    return new Partida({ criador: param.criador });
   }
 
   makeid(length) {
@@ -18,5 +27,9 @@ export class Partida {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+  }
+
+  incluirJogador(jogador: Jogador) {
+    this.valores.jogadores.add(jogador);
   }
 }
