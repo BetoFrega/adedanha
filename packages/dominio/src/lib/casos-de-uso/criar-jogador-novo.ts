@@ -11,10 +11,15 @@ export class CriarJogadorNovo {
     private readonly gerenciadorDeEventos: GerenciadorDeEventos
   ) {}
 
-  async executar(opções: { nome: string }) {
-    const jogador = Jogador.novo({ nome: opções.nome });
-    this.repositórioDeJogadores.salvar(jogador).then((jogador: Jogador) => {
-      this.gerenciadorDeEventos.enviar(Eventos.usuárioCriado, { jogador });
-    });
+  async executar(userId: string, opções: { nome: string }) {
+    const jogador = Jogador.novo({ nome: opções.nome, userId });
+    await this.repositórioDeJogadores
+      .salvar(jogador)
+      .then((jogador: Jogador) => {
+        return this.gerenciadorDeEventos.enviar(Eventos.usuárioCriado, {
+          userId,
+          jogador,
+        });
+      });
   }
 }
