@@ -1,5 +1,7 @@
 import { Jogador } from '../entidades/jogador';
 
 export interface RepositórioDeJogadores {
-  salvar(jogador: Jogador): Promise<Jogador>;
+  salvar(userId: string, jogador: Jogador): Promise<Jogador>;
+
+  recuperar(userid: string): Promise<Jogador>;
 }

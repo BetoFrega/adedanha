@@ -22,15 +22,12 @@ describe('Caso: cria jogador novo', () => {
     const USER_ID = '1';
     criaJogadorNovo.executar(USER_ID, { nome: 'Jogador da Silva' });
     expect(repositórioDeJogadoresMock.salvar).toHaveBeenCalledWith(
+      USER_ID,
       expect.any(Jogador)
     );
   });
   it('deve chamar o gerenciador de eventos', async () => {
-    const repositórioDeJogadoresMock: Partial<RepositórioDeJogadores> = {
-      salvar: jest.fn().mockImplementation(async (jogador: Jogador) => {
-        return jogador;
-      }),
-    };
+    const repositórioDeJogadoresMock = new RepositórioDeJogadoresMock();
     const gerenciadorDeEventosMock: Partial<GerenciadorDeEventos> = {
       enviar: jest.fn(),
     };
