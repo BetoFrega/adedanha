@@ -2,7 +2,7 @@ import { RepositórioDeJogadoresMock } from '../adaptadores/repositorio-de-jogad
 import { RepositórioDePartidasMock } from '../adaptadores/repositorio-de-partidas.mock';
 import { Jogador } from '../entidades/jogador';
 import { Partida } from '../entidades/partida';
-import { EntrarNaPartida } from './entrar-na.partida';
+import { EntrarNaPartida } from './entrar-na-partida';
 
 describe('Caso: entrar na partida', () => {
   let repositórioDePartidasMock: RepositórioDePartidasMock;
