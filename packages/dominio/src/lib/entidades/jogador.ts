@@ -8,6 +8,9 @@ export class Jogador {
   }
 
   static novo(param: { nome: string }) {
+    if (param.nome.length < 6) {
+      throw new Error('Nome deve ter 6 ou mais caracteres.');
+    }
     return new Jogador({ nome: param.nome });
   }
 }
