@@ -14,6 +14,10 @@ export class Jogador {
     };
   }
 
+  get partidaAtual(): Partida | null {
+    return this.valores.partidaAtual || null;
+  }
+
   static novo(param: { nome: string; userId: string }) {
     if (param.nome.length < 6) {
       throw new Error('Nome deve ter 6 ou mais caracteres.');

@@ -1,9 +1,16 @@
 import { Jogador } from './jogador';
-
+export class Rodada {
+  ativa: boolean;
+  jogadores: Set<Jogador>;
+  adicionarJogador(jogador: Jogador) {
+    this.jogadores.add(jogador);
+  }
+}
 export class Partida {
   readonly código: string;
   private valores: {
     jogadores: Set<Jogador>;
+    rodadas: Array<Rodada>;
     criador: Jogador;
   };
 
@@ -12,7 +19,11 @@ export class Partida {
     this.valores = {
       jogadores: new Set<Jogador>(),
       criador: param.criador,
+      rodadas: new Array<Rodada>(),
     };
+  }
+  get rodadaAtual(): Rodada | null {
+    return this.valores.rodadas.find((rodada) => rodada.ativa);
   }
 
   static nova(param: { criador: Jogador }): Partida {
@@ -31,5 +42,10 @@ export class Partida {
 
   incluirJogador(jogador: Jogador) {
     this.valores.jogadores.add(jogador);
+  }
+
+  novaRodada() {
+    if (this.rodadaAtual) throw new Error('Já existe uma rodada ativa.');
+    this.valores.rodadas.push(new Rodada());
   }
 }
